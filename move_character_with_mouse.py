@@ -31,11 +31,6 @@ def draw_hand():
     update_canvas()
     pass
 
-def draw_character():
-    global character_x, character_y
-    character.clip_draw(0,0,100,100,character_x,character_y)
-    pass
-
 def move_character():
     global x, y
     t = 0
@@ -44,13 +39,25 @@ def move_character():
         x = (1-t) * character_x + t * hand_x
         y = (1-t) * character_y + t * hand_y
 
-        character.clip_draw(frame * 100, 0, 100, 100, x, y)
+        make_background()
+
+        if x <= character_x:
+            character.clip_draw(frame * 100, 0, 100, 100, x, y)
+        elif x >= character_x:
+            character.clip_draw(frame * 100, 100, 100, 100, x, y)
         update_canvas()
 
         frame = (frame + 1) % 8
         t += 0.1
         delay(0.05)
     pass
+
+
+def make_background():
+    clear_canvas()
+    TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
+    hand.draw(hand_x, hand_y)
+
 
 # 기본 변수값
 running = True
