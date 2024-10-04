@@ -63,16 +63,19 @@ def make_background():
 running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
+
+# 일단 랜덤값으로 시작, 의미없는 더미변수
+hand_x = random.randint(0, 800)
+hand_y = random.randint(0, 600)
 character_x = random.randint(0,800)
 character_y = random.randint(0,600)
+
 hide_cursor()
 
 while running:
     moving = True
     clear_canvas()
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    hand_x = random.randint(0,800)
-    hand_y = random.randint(0,600)
     draw_hand()
     while moving:
         move_character()
