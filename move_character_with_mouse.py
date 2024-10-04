@@ -10,7 +10,7 @@ hand = load_image('hand_arrow.png')
 
 def handle_events():
 
-    global running
+    global running, moving
     global x, y
 
     events = get_events()
@@ -61,16 +61,18 @@ character_y = random.randint(0,600)
 hide_cursor()
 
 while running:
+    moving = True
     clear_canvas()
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
     hand_x = random.randint(0,800)
     hand_y = random.randint(0,600)
     draw_hand()
-    draw_character()
-    update_canvas()
-
-    handle_events()
-
+    while moving:
+        move_character()
+        character_x = hand_x
+        character_y = hand_y
+        moving = False
+        handle_events()
 close_canvas()
 
 
