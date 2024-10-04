@@ -36,20 +36,38 @@ def draw_character():
     character.clip_draw(0,0,100,100,character_x,character_y)
     pass
 
+def move_character():
+    global x, y
+    t = 0
+    frame = 0
+    while t <= 1:
+        x = (1-t) * character_x + t * hand_x
+        y = (1-t) * character_y + t * hand_y
+
+        character.clip_draw(frame * 100, 0, 100, 100, x, y)
+        update_canvas()
+
+        frame = (frame + 1) % 8
+        t += 0.1
+        delay(0.05)
+    pass
+
 # 기본 변수값
 running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
+character_x = random.randint(0,800)
+character_y = random.randint(0,600)
 hide_cursor()
-# 해당부분 조정 필요
-character_x, character_y = hand_x, hand_y = 0, 0
 
 while running:
     clear_canvas()
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
+    hand_x = random.randint(0,800)
+    hand_y = random.randint(0,600)
+    draw_hand()
     draw_character()
     update_canvas()
-    frame = (frame + 1) % 8
 
     handle_events()
 
